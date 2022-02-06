@@ -1,5 +1,4 @@
 import json
-
 import requests
 import pandas as pd
 
@@ -7,8 +6,9 @@ from rest_framework.decorators import action
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
+
 from .serializers import *
-# Create your views here.
+
 
 def fetch_data(sector):
     """
@@ -44,7 +44,7 @@ class HotelView(ModelViewSet):
     queryset = Hotel.objects.all()
     serializer_class = HotelSerializer
 
-    @action(methods=['get'], detail=False, permission_classes=[AllowAny])
+    @action(methods=['get'], detail=False)
     def fetch(self,request):
         """
             get_or_create the instance of hotel
@@ -52,20 +52,20 @@ class HotelView(ModelViewSet):
         """
         data=fetch_data('hotel')
         hotel_list=[]
+
         for hotel in data:
+
             try:
                 single_hotel=Hotel.objects.get(name=hotel['name'])
                 hotel_list.append(single_hotel)
+
             except Hotel.DoesNotExist:
                 hotel_obj=Hotel(name=hotel['name'], email=hotel['email'], phone=hotel['phone'], website=hotel['website'])
                 hotel_obj.save()
                 hotel_list.append(hotel_obj)
 
         serializers=HotelSerializer(hotel_list,many=True)
-
         return Response(serializers.data)
-
-
 
 
 class GuestHouseView(ModelViewSet):
@@ -80,10 +80,13 @@ class GuestHouseView(ModelViewSet):
         """
         data = fetch_data('guest_house')
         guest_house_list = []
+
         for guest in data:
+
             try:
                 single_guest_house = GuestHouse.objects.get(name=guest['name'])
                 guest_house_list.append(single_guest_house)
+
             except GuestHouse.DoesNotExist:
                 guest_obj = GuestHouse(name=guest['name'], email=guest['email'], phone=guest['phone'],
                                   website=guest['website'])
@@ -91,7 +94,6 @@ class GuestHouseView(ModelViewSet):
                 guest_house_list.append(guest_obj)
 
         serializers = GuestHouseSerializer(guest_house_list, many=True)
-
         return Response(serializers.data)
 
 
@@ -107,10 +109,13 @@ class MuseumView(ModelViewSet):
         """
         data = fetch_data('museum')
         museum_list = []
+
         for museum in data:
+
             try:
                 single_museum = Museum.objects.get(name=museum['name'])
                 museum_list.append(single_museum)
+
             except Museum.DoesNotExist:
                 museum_obj = Museum(name=museum['name'], email=museum['email'], phone=museum['phone'],
                                   website=museum['website'])
@@ -118,7 +123,6 @@ class MuseumView(ModelViewSet):
                 museum_list.append(museum_obj)
 
         serializers = MuseumSerializer(museum_list, many=True)
-
         return Response(serializers.data)
 
 
@@ -134,10 +138,13 @@ class AttractionView(ModelViewSet):
         """
         data = fetch_data('attraction')
         attraction_list = []
+
         for attraction in data:
+
             try:
                 single_attraction = Attraction.objects.get(name=attraction['name'])
                 attraction_list.append(single_attraction)
+
             except Attraction.DoesNotExist:
                 attraction_obj = Attraction(name=attraction['name'], email=attraction['email'], phone=attraction['phone'],
                                     website=attraction['website'])
@@ -145,7 +152,6 @@ class AttractionView(ModelViewSet):
                 attraction_list.append(attraction_obj)
 
         serializers = AttractionSerializer(attraction_list, many=True)
-
         return Response(serializers.data)
 
 
@@ -161,10 +167,13 @@ class InformationView(ModelViewSet):
         """
         data = fetch_data('information')
         information_list = []
+
         for information in data:
+
             try:
                 single_information = Information.objects.get(name=information['name'])
                 information_list.append(single_information)
+
             except Information.DoesNotExist:
                 information_obj = Information(name=information['name'], email=information['email'], phone=information['phone'],
                                     website=information['website'])
@@ -172,7 +181,6 @@ class InformationView(ModelViewSet):
                 information_list.append(information_obj)
 
         serializers = InformationSerializer(information_list, many=True)
-
         return Response(serializers.data)
 
 
@@ -188,10 +196,13 @@ class OutDoorActivitiesView(ModelViewSet):
         """
         data = fetch_data('Outdoor_Activities')
         outdoor_activities_list = []
+
         for outdoor_activities in data:
+
             try:
                 single_outdoor_activities = OutdoorActivities.objects.get(name=outdoor_activities['name'])
                 outdoor_activities_list.append(single_outdoor_activities)
+
             except OutdoorActivities.DoesNotExist:
                 outdoor_activities_obj = OutdoorActivities(name=outdoor_activities['name'], email=outdoor_activities['email'], phone=outdoor_activities['phone'],
                                     website=outdoor_activities['website'])
@@ -199,7 +210,6 @@ class OutDoorActivitiesView(ModelViewSet):
                 outdoor_activities_list.append(outdoor_activities_obj)
 
         serializers = OutdoorActivitiesSerializer(outdoor_activities_list, many=True)
-
         return Response(serializers.data)
 
 
@@ -215,10 +225,13 @@ class HostelView(ModelViewSet):
         """
         data = fetch_data('hostel')
         hostel_list = []
+
         for hostel in data:
+
             try:
                 single_hostel = Hostel.objects.get(name=hostel['name'])
                 hostel_list.append(single_hostel)
+
             except Hostel.DoesNotExist:
                 hostel_obj = Hostel(name=hostel['name'], email=hostel['email'], phone=hostel['phone'],
                                     website=hostel['website'])
@@ -242,10 +255,13 @@ class ThemeParkView(ModelViewSet):
         """
         data = fetch_data('theme_park')
         theme_park_list = []
+
         for theme_park in data:
             try:
+
                 single_theme_park = ThemePark.objects.get(name=theme_park['name'])
                 theme_park_list.append(single_theme_park)
+
             except ThemePark.DoesNotExist:
                 theme_park_obj = ThemePark(name=theme_park['name'], email=theme_park['email'], phone=theme_park['phone'],
                                     website=theme_park['website'])
@@ -253,13 +269,12 @@ class ThemeParkView(ModelViewSet):
                 theme_park_list.append(theme_park_obj)
 
         serializers = ThemeParkSerializer(theme_park_list, many=True)
-
         return Response(serializers.data)
 
 
 class HotelRatingView(ModelViewSet):
     queryset = HotelRating.objects.all()
-    serializer_class = HotelSerializer
+    serializer_class = HotelRatingSerializer
 
 
 class HotelImageView(ModelViewSet):

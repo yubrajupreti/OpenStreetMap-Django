@@ -50,7 +50,7 @@ class ThemeParkSerializer(serializers.ModelSerializer):
         model= ThemePark
         fields='__all__'
 
-class HotelSerializer(serializers.ModelSerializer):
+class HotelRatingSerializer(serializers.ModelSerializer):
     class Meta:
         model=HotelRating
         fields='__all__'
