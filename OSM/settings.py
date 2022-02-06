@@ -10,11 +10,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
-import dotenv
+
 
 from pathlib import Path
 
-dotenv.read_dotenv()
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ['SECRET_KEY']
+SECRET_KEY = 'django-insecure-cvxer)=pc)dn&26i7y1+jnk*@@irfrk8l5t@f1ky!5_%r)a93q'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -90,12 +90,12 @@ WSGI_APPLICATION = 'OSM.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 DATABASES = {
         'default': {
-            'ENGINE': os.environ['POSTGRES_ENGINE'],
-            'NAME': os.environ['POSTGRES_NAME'],
-            'USER': os.environ['POSTGRES_USER'],
-            'PASSWORD': os.environ['POSTGRES_PASSWORD'],
-            'HOST': os.environ['POSTGRES_HOST'],
-            'PORT': '',
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'osm',
+            'USER': 'postgres',
+            'PASSWORD': 'postgres',
+            'HOST': 'localhost',
+            'PORT': '5432',
         }
 
     }
