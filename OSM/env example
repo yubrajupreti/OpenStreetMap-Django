@@ -1,0 +1,11 @@
+SECRET_KEY='******************************************************'
+
+
+
+#POSTGRES
+POSTGRES_ENGINE='django.db.backends.postgresql'
+POSTGRES_NAME='Name of database'
+POSTGRES_USER='*******'
+POSTGRES_PASSWORD='*******'
+POSTGRES_HOST='localhost'
+POSTGRES_PORT=5432
